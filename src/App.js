@@ -1,25 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./LoginPage";
+import Dashboard from "./Dashboard";
+import Fruits from "./Fruits";
+import Veggies from "./Veggies";
+import Meats from "./Meats";
+import Cart from "./Cart";
+import Checkout from "./Checkout";
+import "./index.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [userCarts, setUserCarts] = useState({});
+
+    const handleLogin = (username) => {
+        setLoggedInUser(username);
+        if (!userCarts[username]) {
+            setUserCarts({ ...userCarts, [username]: [] });
+        }
+    };
+
+    const addToCart = (item) => {
+        if (loggedInUser) {
+            const newUserCarts = {
+                ...userCarts,
+                [loggedInUser]: [...userCarts[loggedInUser], item],
+            };
+            setUserCarts(newUserCarts);
+        }
+    };
+
+    const handleLogout = () => {
+        setLoggedInUser(null);
+    };
+
+    return (
+        <Router>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<LoginPage onLogin={handleLogin} />}
+                />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <Dashboard
+                            loggedInUser={loggedInUser}
+                            onLogout={handleLogout}
+                            addToCart={addToCart}
+                        />
+                    }
+                />
+                <Route
+                    path="/fruits"
+                    element={<Fruits addToCart={addToCart} />}
+                />
+                <Route
+                    path="/veggies"
+                    element={<Veggies addToCart={addToCart} />}
+                />
+                <Route
+                    path="/meats"
+                    element={<Meats addToCart={addToCart} />}
+                />
+                <Route
+                    path="/cart"
+                    element={
+                        <Cart cartItems={userCarts[loggedInUser] || []} />
+                    }
+                />
+                <Route path="/checkout" element={<Checkout />} /> {/* Add this route */}
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
