@@ -15,7 +15,7 @@ function Cart({ cartItems }) {
                 ))}
             </ul>
             <p>Total: ${totalPrice.toFixed(2)}</p>
-            <Link to="/Checkout"> {/* Update the path here */}
+            <Link to="/Checkout"> 
                 <button>Proceed to Checkout</button>
             </Link>
         </div>

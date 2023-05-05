@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Add this import
+import { Link } from "react-router-dom";
 import "./Veggies.css";
 import veggiesList from "./VeggiesList";
 
@@ -22,11 +22,11 @@ function Veggies({ addToCart }) {
                 ))}
             </ul>
             <div className="button-container">
+                <Link to="/dashboard">
+                    <button>Dashboard</button>
+                </Link>
                 <Link to="/cart">
                     <button>View Cart</button>
-                </Link>
-                <Link to="/dashboard">
-                    <button>Back to Dashboard</button>
                 </Link>
             </div>
         </div>

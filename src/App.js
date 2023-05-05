@@ -7,11 +7,13 @@ import Veggies from "./Veggies";
 import Meats from "./Meats";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
+import Sales from './Sales';
 import "./index.css";
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState(null);
     const [userCarts, setUserCarts] = useState({});
+    const [salesData, setSalesData] = useState([]);
 
     const handleLogin = (username) => {
         setLoggedInUser(username);
@@ -30,8 +32,8 @@ function App() {
         }
     };
 
-    const handleLogout = () => {
-        setLoggedInUser(null);
+    const handlePlaceOrder = (sale) => {
+        setSalesData([...salesData, sale]);
     };
 
     return (
@@ -43,13 +45,7 @@ function App() {
                 />
                 <Route
                     path="/dashboard"
-                    element={
-                        <Dashboard
-                            loggedInUser={loggedInUser}
-                            onLogout={handleLogout}
-                            addToCart={addToCart}
-                        />
-                    }
+                    element={<Dashboard loggedInUser={loggedInUser} addToCart={addToCart} />}
                 />
                 <Route
                     path="/fruits"
@@ -69,7 +65,16 @@ function App() {
                         <Cart cartItems={userCarts[loggedInUser] || []} />
                     }
                 />
-                <Route path="/checkout" element={<Checkout />} /> {/* Add this route */}
+                <Route
+                    path="/checkout"
+                    element={
+                        <Checkout
+                            cartItems={userCarts[loggedInUser] || []}
+                            onPlaceOrder={handlePlaceOrder}
+                        />
+                    }
+                />
+                <Route path="/sales" element={<Sales salesData={salesData} />} />
             </Routes>
         </Router>
     );

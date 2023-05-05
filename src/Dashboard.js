@@ -50,7 +50,7 @@ function Dashboard({ loggedInUser, addToCart }) {
                         <img
                             src={searchResult.img}
                             alt={searchResult.name}
-                            className="item-image" // Add the new class here
+                            className="item-image"
                         />
                         <div>
                             {searchResult.name} - ${searchResult.price.toFixed(2)}
@@ -62,18 +62,23 @@ function Dashboard({ loggedInUser, addToCart }) {
                 <div>
                     <h2 className="category-heading">Categories</h2>
                     <div className="category-buttons">
-                        <Link to="/fruits">
+                        <Link to={{ pathname: "/fruits", state: { addToCart } }}>
                             <button>Fruits</button>
                         </Link>
-                        <Link to="/veggies">
+                        <Link to={{ pathname: "/veggies", state: { addToCart } }}>
                             <button>Veggies</button>
                         </Link>
-                        <Link to="/meats">
+                        <Link to={{ pathname: "/meats", state: { addToCart } }}>
                             <button>Meats</button>
                         </Link>
                     </div>
                 </div>
             )}
+
+            <Link to="/sales" className="sales-link">
+                <button className="view-sales-button">View Sales</button>
+            </Link>
+
             <Link to="/cart" className="cart-link">
                 <button className="view-cart-button">View Cart</button>
             </Link>

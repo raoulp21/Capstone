@@ -28,7 +28,7 @@
 .button-container {
        display: flex;
        justify-content: space-between;
-       margin-top: 20px;
+       margin-top: 40px;
    }
 
 .button-container button {
@@ -44,3 +44,4 @@
 .button-container button:hover {
     background-color: #45a049;
 }
+
