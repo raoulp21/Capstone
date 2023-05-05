@@ -32,8 +32,19 @@ function App() {
         }
     };
 
+    const clearCart = () => {
+        if (loggedInUser) {
+            setUserCarts(prevUserCarts => ({
+                ...prevUserCarts,
+                [loggedInUser]: [],
+            }));
+        }
+    };
+
+
     const handlePlaceOrder = (sale) => {
         setSalesData([...salesData, sale]);
+        setUserCarts({ ...userCarts, [loggedInUser]: [] });  
     };
 
     return (
@@ -62,7 +73,7 @@ function App() {
                 <Route
                     path="/cart"
                     element={
-                        <Cart cartItems={userCarts[loggedInUser] || []} />
+                        <Cart cartItems={userCarts[loggedInUser] || []} clearCart={clearCart} />
                     }
                 />
                 <Route

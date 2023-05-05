@@ -5,11 +5,11 @@ import "./LoginPage.css";
 const users = [
     {
         username: "user1",
-        password: "password1",
+        password: "password",
     },
     {
         username: "user2",
-        password: "password2",
+        password: "password",
     },
 ];
 

@@ -66,7 +66,7 @@ function Dashboard({ loggedInUser, addToCart }) {
                             <button>Fruits</button>
                         </Link>
                         <Link to={{ pathname: "/veggies", state: { addToCart } }}>
-                            <button>Veggies</button>
+                            <button>Vegetables</button>
                         </Link>
                         <Link to={{ pathname: "/meats", state: { addToCart } }}>
                             <button>Meats</button>

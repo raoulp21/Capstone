@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Cart({ cartItems }) {
+function Cart({ cartItems, clearCart }) {
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+
+    const buttonStyle = {
+        padding: "10px 20px",
+        fontSize: "18px",
+        cursor: "pointer",
+        margin: "10px"
+    };
+
+    const isCartEmpty = totalPrice === 0;
 
     return (
         <div>
@@ -15,12 +24,13 @@ function Cart({ cartItems }) {
                 ))}
             </ul>
             <p>Total: ${totalPrice.toFixed(2)}</p>
-            <Link to="/Checkout"> 
-                <button>Proceed to Checkout</button>
+            {isCartEmpty && <p>You need to add items to the cart.</p>}
+            <Link to={isCartEmpty ? "#" : "/Checkout"} style={{ textDecoration: "none" }}>
+                <button style={buttonStyle} disabled={isCartEmpty}>Proceed to Checkout</button>
             </Link>
+            <button onClick={clearCart} style={buttonStyle}>Clear Cart</button>
         </div>
     );
 }
 
 export default Cart;
-

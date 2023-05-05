@@ -11,7 +11,7 @@ function Fruits({ addToCart }) {
 
     return (
         <div>
-            <h1>Fruits</h1>
+            <h1 className="heading">Fruits</h1> 
             <ul className="item-list">
                 {fruitsList.map((fruit) => (
                     <li key={fruit.name} onClick={() => handleClick(fruit)}>
