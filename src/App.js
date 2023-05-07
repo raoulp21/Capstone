@@ -9,6 +9,8 @@ import Cart from "./Cart";
 import Checkout from "./Checkout";
 import Sales from './Sales';
 import "./index.css";
+import Signup from './Signup'
+
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState(null);
@@ -53,6 +55,9 @@ function App() {
                 <Route
                     path="/"
                     element={<LoginPage onLogin={handleLogin} />}
+                />
+                <Route 
+                    path='/signup' element={<Signup />}
                 />
                 <Route
                     path="/dashboard"
